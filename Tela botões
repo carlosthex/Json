@@ -21,8 +21,6 @@ import com.example.testes.R;
 
 public class TelaBotões extends AppCompatActivity {
 
-    public RequestQueue queue;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
