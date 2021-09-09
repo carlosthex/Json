@@ -1,0 +1,50 @@
+package com.example.testes.ui;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.widget.TextView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.testes.R;
+
+import org.json.JSONArray;
+
+public class Albums extends AppCompatActivity implements Response.ErrorListener, Response.Listener<JSONArray> {
+
+    public RequestQueue queue3;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_albums);
+        mostraAlbums();
+    }
+
+    public void mostraAlbums() {
+        queue3 = Volley.newRequestQueue(this);
+        JsonArrayRequest requisicao = new JsonArrayRequest(Request.Method.GET,
+                "https://jsonplaceholder.typicode.com/albums", null,
+                this, this);
+        queue3.add(requisicao);
+    }
+
+    @Override
+    public void onResponse(JSONArray response) {
+        TextView ed = findViewById(R.id.tv2);
+
+        ed.setText("Resultados: "+response.length()+"\n"+"Todos:\n"+response.toString());
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError error) {
+        TextView ed = findViewById(R.id.tv2);
+        ed.setText(error.getMessage());
+
+    }
+}
