@@ -1,0 +1,50 @@
+package com.example.testes.ui;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.widget.TextView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.testes.R;
+
+import org.json.JSONArray;
+
+public class Todos extends AppCompatActivity implements Response.Listener<JSONArray>, Response.ErrorListener {
+
+    public RequestQueue queue2;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_todos);
+        mostraTodos();
+    }
+
+    public void mostraTodos() {
+        queue2 = Volley.newRequestQueue(this);
+        JsonArrayRequest requisicao = new JsonArrayRequest(Request.Method.GET,
+                "https://jsonplaceholder.typicode.com/todos", null,
+                this, this);
+        queue2.add(requisicao);
+    }
+
+    @Override
+    public void onResponse(JSONArray response) {
+        TextView ed = findViewById(R.id.tv1);
+
+        ed.setText("Resultados: "+response.length()+"\n"+"Todos:\n"+response.toString());
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError error) {
+        TextView ed = findViewById(R.id.tv1);
+        ed.setText(error.getMessage());
+
+    }
+}
