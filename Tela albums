@@ -38,7 +38,7 @@ public class Albums extends AppCompatActivity implements Response.ErrorListener,
     public void onResponse(JSONArray response) {
         TextView ed = findViewById(R.id.tv2);
 
-        ed.setText("Resultados: "+response.length()+"\n"+"Todos:\n"+response.toString());
+        ed.setText("Resultados: "+response.length()+"\n"+"Albums:\n"+response.toString());
     }
 
     @Override
