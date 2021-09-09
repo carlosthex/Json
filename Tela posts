@@ -39,7 +39,7 @@ public class Posts extends AppCompatActivity implements Response.Listener<JSONAr
     public void onResponse(JSONArray response) {
         TextView ed = findViewById(R.id.tv3);
 
-        ed.setText("Resultados: "+response.length()+"\n"+"Todos:\n"+response.toString());
+        ed.setText("Resultados: "+response.length()+"\n"+"Posts:\n"+response.toString());
     }
 
     @Override
